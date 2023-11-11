@@ -1,0 +1,51 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.about-us-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    min-height: 80vh;
+    margin-bottom: 50px;
+}
+  
+.card-full {
+    background-color: transparent;
+    border: 2px solid gold;
+    border-radius: 30px;
+    padding: 20px;
+    margin: 30px 50px 30px 50px;
+    transition: background-color 0.3s;
+  }
+  
+  .card-full:nth-child(2) {
+    width: 100%;
+  }
+  .card:hover,
+  .card-full:hover {
+    background: rgba(25, 20, 5, 0.3); /* Slightly darker golden background on hover */
+  }
+  
+  h2 {
+    font-size: 1.9rem;
+    font-weight: bold;
+  }
+  
+  p {
+    font-size: 1.2rem;
+    color: #888888;
+  }
+  .footer {
+    background-color: #333333; /* Footer background color */
+    color: white; /* Footer text color */
+    padding: 10px;
+    text-align: center;
+    font-size: 1rem;
+    position: fixed; /* Position the footer as a fixed element */
+    bottom: 0;
+    width: 100%;
+  }
+  
