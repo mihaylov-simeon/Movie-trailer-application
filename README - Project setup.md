@@ -10,7 +10,6 @@ Please run the following commands in your Intellij Terminal:
 ### npm install axios
 ### code .
 ### npm install bootstrap 
-**ADD** -> import 'bootstrap/dist/css/bootstrap.min.css'; -> in the index.js file
 ### npm i react-bootstrap
 ### npm i @fortawesome/react-fontawesome
 ### npm i @fortawesome/free-solid-svg-icons
@@ -18,6 +17,8 @@ Please run the following commands in your Intellij Terminal:
 ### npm i react-router-dom
 ### npm install @mui/material @emotion/react @emotion/styled
 ### npm install react-material-ui-carousel
+
+**ADD IF MISSNG** -> import 'bootstrap/dist/css/bootstrap.min.css'; -> in the index.js file
 
 After successfull instalation of the components, you can simply start the application by typing -> **npm start** in your intellij terminal - No additional setup needed.
 
