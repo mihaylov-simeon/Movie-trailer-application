@@ -19,10 +19,12 @@ Please run the following commands in your Intellij Terminal:
 ### npm install @mui/material @emotion/react @emotion/styled
 ### npm install react-material-ui-carousel
 
-After successfull instalation of the components, you can simply start the application by typing -> **npm start** in your intellij terminal.
+After successfull instalation of the components, you can simply start the application by typing -> **npm start** in your intellij terminal - No additional setup needed.
 
 The application will start on **localhost:3000**
 
-You can run the server side from the **FinalExamProjectMovieApplication.class** (as usual) directly from Intellij.
+You can run the server side from the **FinalExamProjectMovieApplication.class** (as usual) directly from Intellij - No additional setup needed.
 
 !!!! Note that the Server and Client side need to be running simultaneously, in order for the application to work properly.
+
+That's it - Enjoy.
