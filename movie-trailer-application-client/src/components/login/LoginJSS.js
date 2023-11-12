@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import "./LoginStyle.css";
+import { useAuth } from "../../components/authentication/AuthProvider";
 import axiosConfig from "../../api/axiosConfig";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
   const [isLoginFormVisible, setIsLoginFormVisible] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -33,12 +35,11 @@ const Login = () => {
         password: formData.password,
       });
 
-      // Handle successful login
-      console.log("Logged in:", response.data);
-
-      // Check for the success message or any other indicator in the response
       if (response.status === 200) {
-        // Redirect to the aboutus page
+        // Set authentication status using the context
+        login();
+
+        // Redirect to the home page or any other page
         navigate("/");
       } else {
         // Handle other scenarios if needed
@@ -48,6 +49,7 @@ const Login = () => {
       console.error("Login failed:", error);
     }
   };
+  
 
   const handleRegisterSubmit = async () => {
     try {

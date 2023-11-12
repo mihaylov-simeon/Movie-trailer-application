@@ -11,6 +11,7 @@ import NotFound from './components/notFound/NotFound';
 import LoginJSS from './components/login/LoginJSS';
 import SearchBar from './components/search/SearchBar';
 import AboutUs from './components/aboutus/AboutUs';
+import { AuthProvider } from "./components/authentication/AuthProvider";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -44,7 +45,7 @@ function App() {
       movie.title.toLowerCase().includes(query.toLowerCase())
     );
     setSearchResults(results);
-    navigate('/'); // Navigate back to the home page
+    navigate('/');
   }
 
   useEffect(() => {
@@ -52,29 +53,32 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <Header />
-      <SearchBar handleSearch={handleSearch} />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home movies={searchResults.length > 0 ? searchResults : movies} />} />
-          <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
-          <Route
-            path="/Reviews/:movieId"
-            element={
-            <Reviews 
-            getMovieData={getMovieData} 
-            movie={movie} 
-            reviews={reviews} 
-            setReviews={setReviews} 
-            />}
-          />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<LoginJSS />} />
-          <Route path="/aboutUs" element={<AboutUs />} />
-        </Route>
-      </Routes>
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <SearchBar handleSearch={handleSearch} />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home movies={searchResults.length > 0 ? searchResults : movies} />} />
+            <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
+            <Route
+              path="/Reviews/:movieId"
+              element={
+                <Reviews 
+                  getMovieData={getMovieData} 
+                  movie={movie} 
+                  reviews={reviews} 
+                  setReviews={setReviews} 
+                />
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+            <Route path="/login" element={<LoginJSS />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
+          </Route>
+        </Routes>
+      </div>
+    </AuthProvider>
   );
 }
 
