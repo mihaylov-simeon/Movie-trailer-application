@@ -9,7 +9,7 @@ import org.springframework.web.context.annotation.SessionScope;
 public class LoggedUser {
 
     @Getter
-    private String username;
+    private String email;
 
     private boolean isLogged;
 
@@ -18,12 +18,12 @@ public class LoggedUser {
     }
 
     public void login(String username) {
-        this.username = username;
+        this.email = username;
         this.isLogged = true;
     }
 
     public void logout() {
-        this.username = null;
+        this.email = null;
         this.isLogged = false;
     }
 }

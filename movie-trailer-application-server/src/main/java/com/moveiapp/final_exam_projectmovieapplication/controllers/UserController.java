@@ -29,6 +29,7 @@ public class UserController {
         }
 
         if (userService.login(userLoginDTO)) {
+
             return ResponseEntity.ok().body("Login successful");
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
@@ -54,7 +55,12 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not logged in.");
         }
 
-        this.userService.logout();
+        // Call the service to mark the user as active: false
+        this.userService.logout(loggedUser.getEmail());
+
+        // Clear the authentication state
+        loggedUser.logout();
+
         return ResponseEntity.ok().body("Logout successful");
     }
 }

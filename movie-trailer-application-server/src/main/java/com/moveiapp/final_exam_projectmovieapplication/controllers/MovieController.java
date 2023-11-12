@@ -19,11 +19,9 @@ import java.util.Optional;
 public class MovieController {
 
     private final MovieService service;
-//    private final MovieImport movieImport;
 
     public MovieController(MovieService service) {
         this.service = service;
-//        this.movieImport = movieImport;
     }
 
     @GetMapping
@@ -35,16 +33,4 @@ public class MovieController {
     public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId) {
         return new ResponseEntity<>(service.findMovieByImdbId(imdbId), HttpStatus.OK);
     }
-
-//    @PostMapping("/")
-//    public ModelAndView importMovies() {
-//        ModelAndView modelAndView = new ModelAndView("import-result");
-//        try {
-//            modelAndView.addObject("importReport", this.movieImport.importMovies());
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return modelAndView;
-//    }
-
 }

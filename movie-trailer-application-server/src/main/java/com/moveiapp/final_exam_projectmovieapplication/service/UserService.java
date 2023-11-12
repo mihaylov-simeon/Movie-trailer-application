@@ -9,5 +9,5 @@ public interface UserService {
 
     boolean login(UserLoginDTO userLoginDTO);
 
-    void logout();
+    void logout(String email);
 }

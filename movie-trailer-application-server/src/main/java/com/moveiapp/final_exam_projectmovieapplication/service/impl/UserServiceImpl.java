@@ -47,10 +47,10 @@ public class UserServiceImpl implements UserService {
         String email = userLoginDTO.email();
         User user = userRepository.findByEmail(email);
 
-        if (user != null
-                && passwordEncoder.matches(userLoginDTO.password(), user.getPassword())) {
+        if (user != null && passwordEncoder.matches(userLoginDTO.password(), user.getPassword())) {
             loggedUser.login(email);
             user.setActive(true);
+            userRepository.save(user);
             return true;
         }
 
@@ -58,7 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void logout() {
-        this.loggedUser.logout();
+    public void logout(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            user.setActive(false);
+            userRepository.save(user);
+        }
+
+        loggedUser.logout();
     }
 }
