@@ -2,24 +2,30 @@ package com.moveiapp.final_exam_projectmovieapplication.service.impl;
 
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserLoginDTO;
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserRegistrationDTO;
+import com.moveiapp.final_exam_projectmovieapplication.model.entities.FavoriteMovie;
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.User;
+import com.moveiapp.final_exam_projectmovieapplication.repositories.FavoriteMovieRepository;
 import com.moveiapp.final_exam_projectmovieapplication.repositories.UserRepository;
 import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
-
     private final LoggedUser loggedUser;
+    private final FavoriteMovieRepository favoriteMovieRepository;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser) {
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, LoggedUser loggedUser, FavoriteMovieRepository favoriteMovieRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.loggedUser = loggedUser;
+        this.favoriteMovieRepository = favoriteMovieRepository;
     }
 
     @Override
@@ -67,5 +73,34 @@ public class UserServiceImpl implements UserService {
         }
 
         loggedUser.logout();
+    }
+
+
+    @Override
+    public List<FavoriteMovie> getFavoriteMovies() {
+        // Get the currently logged-in user
+        User user = userRepository.findByEmail(loggedUser.getEmail());
+
+        if (user != null) {
+            // Log user favorites for debugging
+            System.out.println("User Favorites: " + user.getFavoriteMovies());
+
+            return favoriteMovieRepository.findByUser(user);
+        } else {
+            // Handle the case where the user is not logged in
+            return Collections.emptyList();
+        }
+    }
+
+
+    @Override
+    public void addFavoriteMovie(String imdbId, String title, String poster) {
+        User user = userRepository.findByEmail(loggedUser.getEmail());
+        FavoriteMovie favoriteMovie = new FavoriteMovie();
+        favoriteMovie.setUser(user);
+        favoriteMovie.setImdbId(imdbId);
+        favoriteMovie.setTitle(title);
+        favoriteMovie.setPoster(poster);
+        favoriteMovieRepository.save(favoriteMovie);
     }
 }

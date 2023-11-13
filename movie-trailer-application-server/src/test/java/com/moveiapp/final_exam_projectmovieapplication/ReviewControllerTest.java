@@ -25,7 +25,7 @@ class ReviewControllerTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
+        MockitoAnnotations.initMocks(this);
         reviewController = new ReviewController(reviewService);
     }
 

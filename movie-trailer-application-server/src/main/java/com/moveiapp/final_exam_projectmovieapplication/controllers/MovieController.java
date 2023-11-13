@@ -30,7 +30,9 @@ public class MovieController {
     }
 
     @GetMapping("/{imdbId}")
-    public ResponseEntity<Optional<Movie>> getSingleMovie(@PathVariable String imdbId) {
-        return new ResponseEntity<>(service.findMovieByImdbId(imdbId), HttpStatus.OK);
+    public ResponseEntity<Movie> getSingleMovie(@PathVariable String imdbId) {
+        Optional<Movie> movie = service.findMovieByImdbId(imdbId);
+        return movie.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }
