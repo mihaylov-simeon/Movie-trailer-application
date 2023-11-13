@@ -1,0 +1,33 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.favorites-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.favorite-grid-item {
+  text-align: center;
+}
+
+.favorite-grid-item img {
+  width: 90%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.favorite-grid-item img:hover {
+  width: 89%;
+  transition: 0.5s;
+  border: 2px solid gold;
+}
+
+.favorite-grid-item h4 {
+  font-weight: bold;
+}

@@ -36,9 +36,13 @@ const Header = () => {
             <NavLink className="nav-link" to="/">
               Movies
             </NavLink>
+            <NavLink className="nav-link" to="/favorites">
+              My Trailers
+            </NavLink>
             <NavLink className="nav-link" to="/aboutUs">
               About Us
             </NavLink>
+            
           </Nav>
           {!isLoggedIn && (
             <Button as={NavLink} to="/login" variant="outline-info" className="me-2">

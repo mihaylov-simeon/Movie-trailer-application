@@ -11,6 +11,7 @@ import NotFound from './components/notFound/NotFound';
 import LoginJSS from './components/login/LoginJSS';
 import SearchBar from './components/search/SearchBar';
 import AboutUs from './components/aboutus/AboutUs';
+import Favorites from './components/favorites/Favorites';
 import { AuthProvider } from "./components/authentication/AuthProvider";
 
 function App() {
@@ -52,14 +53,30 @@ function App() {
     getMovies();
   }, [])
 
+  const addToFavorites = async (movie) => {
+    console.log('Adding to favorites:', movie);
+    try {
+      // Assuming your API endpoint for adding a favorite movie is /favorites
+      await api.post('/favorites', { imdbId: movie.imdbId });
+      console.log('Added to favorites successfully.');
+      // Optionally, you can update the state or perform any other action upon success
+    } catch (error) {
+      console.error('Error adding to favorites:', error);
+      // Handle the error, show a message, etc.
+    }
+  };
+
   return (
-    <AuthProvider>
-      <div className="App">
+    <div className="App">
+      <AuthProvider>
         <Header />
         <SearchBar handleSearch={handleSearch} />
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Home movies={searchResults.length > 0 ? searchResults : movies} />} />
+            <Route
+              path="/"
+              element={<Home movies={searchResults.length > 0 ? searchResults : movies} addToFavorites={addToFavorites} />}
+            />
             <Route path="/Trailer/:ytTrailerId" element={<Trailer />} />
             <Route
               path="/Reviews/:movieId"
@@ -75,10 +92,11 @@ function App() {
             <Route path="*" element={<NotFound />} />
             <Route path="/login" element={<LoginJSS />} />
             <Route path="/aboutUs" element={<AboutUs />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Route>
         </Routes>
-      </div>
-    </AuthProvider>
+      </AuthProvider>
+    </div>
   );
 }
 

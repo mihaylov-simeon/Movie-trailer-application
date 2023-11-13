@@ -82,6 +82,7 @@ body {
 
 .movie-review-button-container > button {
     width: 200px;
+    margin-left: 30px;
 }
 
 .view-toggle-button-container {
@@ -126,6 +127,18 @@ body {
 
   .movie-grid-item h4 {
     font-weight: bold;
+  }
+
+  .heart-icon {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #ffffff;
+  }
+
+  .heart-icon:hover {
+    color: gold;
+    font-size: 2.5rem;
+    transition: 0.5s;
   }
 
 @media only screen and (max-width: 800px) {
