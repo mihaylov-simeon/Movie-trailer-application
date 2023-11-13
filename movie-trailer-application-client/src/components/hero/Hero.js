@@ -21,7 +21,7 @@ const Hero = ({ movies }) => {
   };
 
   const addToFavorites = async (movie) => {
-    try {``
+    try {
       if (!isLoggedIn) {
         navigate('/login');
         return;
@@ -121,6 +121,5 @@ const Hero = ({ movies }) => {
     </div>
   );
 };
-
 
 export default Hero;

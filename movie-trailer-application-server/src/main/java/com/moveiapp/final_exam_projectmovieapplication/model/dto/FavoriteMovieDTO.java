@@ -5,6 +5,12 @@ public class FavoriteMovieDTO {
     private String title;
     private String poster;
 
+    public FavoriteMovieDTO(String imdbId, String title, String poster) {
+        this.imdbId = imdbId;
+        this.title = title;
+        this.poster = poster;
+    }
+
     public String getImdbId() {
         return imdbId;
     }

@@ -17,4 +17,5 @@ public interface UserService {
     List<FavoriteMovie> getFavoriteMovies();
     
     void addFavoriteMovie(String imdbId, String title, String poster);
+
 }

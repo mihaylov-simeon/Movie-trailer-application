@@ -4,8 +4,6 @@ import com.moveiapp.final_exam_projectmovieapplication.model.dto.FavoriteMovieDT
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserLoginDTO;
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserRegistrationDTO;
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.FavoriteMovie;
-import com.moveiapp.final_exam_projectmovieapplication.repositories.FavoriteMovieRepository;
-import com.moveiapp.final_exam_projectmovieapplication.repositories.UserRepository;
 import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import com.moveiapp.final_exam_projectmovieapplication.service.impl.LoggedUser;
 import jakarta.validation.Valid;
@@ -27,14 +25,12 @@ public class UserController {
 
     private final UserService userService;
     private final LoggedUser loggedUser;
-    private final UserRepository userRepository;
-    private final FavoriteMovieRepository favoriteMovieRepository;
 
-    public UserController(UserService userService, LoggedUser loggedUser, UserRepository userRepository, FavoriteMovieRepository favoriteMovieRepository) {
+
+
+    public UserController(UserService userService, LoggedUser loggedUser) {
         this.userService = userService;
         this.loggedUser = loggedUser;
-        this.userRepository = userRepository;
-        this.favoriteMovieRepository = favoriteMovieRepository;
     }
 
     @PostMapping("/login")
@@ -103,3 +99,4 @@ public class UserController {
         return ResponseEntity.ok(favoriteMovies);
     }
 }
+
