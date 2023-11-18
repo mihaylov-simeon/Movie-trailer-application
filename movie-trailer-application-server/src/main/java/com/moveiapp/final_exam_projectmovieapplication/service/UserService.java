@@ -18,4 +18,5 @@ public interface UserService {
     
     void addFavoriteMovie(String imdbId, String title, String poster);
 
+    UserRegistrationDTO getUserDetailsByEmail(String email);
 }

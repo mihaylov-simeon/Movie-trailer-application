@@ -5,6 +5,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
 @SpringBootApplication
 public class FinalExamProjectMovieApplication {
 
@@ -20,7 +21,6 @@ public class FinalExamProjectMovieApplication {
 
     @PostConstruct
     public void init() {
-        // Import data on application startup
         dataImportService.importDataFromJson();
     }
 }

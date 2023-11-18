@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -39,9 +41,16 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is already logged in.");
         }
 
-        if (userService.login(userLoginDTO)) {
+        // Assuming you have a method in userService to fetch user details by email
+        UserRegistrationDTO userDetails = userService.getUserDetailsByEmail(userLoginDTO.getEmail());
 
-            return ResponseEntity.ok().body("Login successful");
+        if (userDetails != null && userService.login(userLoginDTO)) {
+            // Include the user's name in the response
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login successful");
+            response.put("name", userLoginDTO.getName());
+
+            return ResponseEntity.ok().body(response);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
         }

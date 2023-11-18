@@ -1,8 +1,9 @@
 package com.moveiapp.final_exam_projectmovieapplication.util;
 
-import jakarta.validation.Validation;
-import jakarta.validation.Validator;
+
+import jakarta.validation.*;
 import org.springframework.stereotype.Component;
+
 
 
 @Component

@@ -1,6 +1,40 @@
 /* For the header links */
 .nav-link:hover,
 .nav-link:active {
-    color: gold; /* Gold color on hover and click */
+    font-weight: bold;
   }
   
+  div.me-2 {
+    margin: 15px;
+  }
+
+  div.me-2 > span {
+    margin-right: 15px;
+  }
+
+  #navbarScroll > button {
+    border: 1.5px solid gold;
+    color: gold;
+    font-weight: bold;
+  }
+
+  #navbarScroll > button:hover {
+    background-color: black;
+    color: gold;
+    border-color: black;
+    font-weight: bold;
+  }
+
+  #navbarScroll > a {
+    background-color: transparent;
+    border: 1.5px solid gold;
+    color: gold;
+    font-weight: bold;
+  }
+
+  #navbarScroll > a:hover {
+    background-color: black;
+    color: gold;
+    border-color: black;
+    font-weight: bold;
+  }

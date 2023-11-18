@@ -35,9 +35,11 @@ const Login = () => {
         password: formData.password,
       });
 
+      
+
       if (response.status === 200) {
         // Set authentication status using the context
-        login();
+        login(response.data.name);
 
         // Redirect to the home page or any other page
         navigate("/");

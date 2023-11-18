@@ -10,7 +10,7 @@ import { useAuth } from "../authentication/AuthProvider";
 import "./Header.css";
 
 const Header = () => {
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn, logout, name } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -19,7 +19,7 @@ const Header = () => {
     // Redirect to the login page
     navigate('/login');
   };
-
+  
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -42,12 +42,20 @@ const Header = () => {
             <NavLink className="nav-link" to="/aboutUs">
               About Us
             </NavLink>
+            <NavLink className="nav-link" to="/contactUs">
+              Contact Us
+            </NavLink>
             
           </Nav>
           {!isLoggedIn && (
             <Button as={NavLink} to="/login" variant="outline-info" className="me-2">
               Login
             </Button>
+          )}
+          {isLoggedIn && (
+            <div className="me-2" style={{ color: "white" }}>
+               <span>Hello, {name}!</span>
+            </div>
           )}
           {isLoggedIn && (
             <Button variant="outline-info" className="me-2" onClick={handleLogout}>

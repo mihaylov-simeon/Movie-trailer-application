@@ -50,11 +50,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean login(UserLoginDTO userLoginDTO) {
-        String email = userLoginDTO.email();
+        String email = userLoginDTO.getEmail();
         User user = userRepository.findByEmail(email);
 
-        if (user != null && passwordEncoder.matches(userLoginDTO.password(), user.getPassword())) {
+        if (user != null && passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword()) && user.getName() != null) {
             loggedUser.login(email);
+            userLoginDTO.setName(user.getName());
             user.setActive(true);
             userRepository.save(user);
             return true;
@@ -102,5 +103,16 @@ public class UserServiceImpl implements UserService {
         favoriteMovie.setTitle(title);
         favoriteMovie.setPoster(poster);
         favoriteMovieRepository.save(favoriteMovie);
+    }
+
+    @Override
+    public UserRegistrationDTO getUserDetailsByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            return new UserRegistrationDTO(user.getName(), user.getEmail(), null);
+        } else {
+            return null;
+        }
     }
 }
