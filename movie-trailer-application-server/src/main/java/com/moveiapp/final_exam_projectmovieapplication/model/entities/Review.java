@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Review extends BaseEntity {
 
-    private String reviewBody;  // Change 'body' to 'reviewBody'
-    private LocalDateTime createdAt;  // Change 'created' to 'createdAt'
-    private LocalDateTime updatedAt;  // Change 'updated' to 'updatedAt'
+    private String reviewBody;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne
     @JsonBackReference
