@@ -106,9 +106,12 @@ const Hero = ({ movies }) => {
                         />
                       )}
                       <div className="movie-review-button-container">
+                        {isLoggedIn && (
                         <Button variant="info" onClick={() => reviews(movie.imdbId)}>
                           Reviews
                         </Button>
+                        )
+                        }
                       </div>
                     </div>
                   </div>
