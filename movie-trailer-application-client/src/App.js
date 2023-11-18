@@ -12,6 +12,7 @@ import LoginJSS from './components/login/LoginJSS';
 import SearchBar from './components/search/SearchBar';
 import AboutUs from './components/aboutus/AboutUs';
 import Favorites from './components/favorites/Favorites';
+import ContactForm from './components/contacts/ContactForm'
 import { AuthProvider } from "./components/authentication/AuthProvider";
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
             <Route path="/login" element={<LoginJSS />} />
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/contactUs" element={<ContactForm />} />
           </Route>
         </Routes>
       </AuthProvider>

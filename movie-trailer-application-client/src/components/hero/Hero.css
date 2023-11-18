@@ -83,6 +83,16 @@ body {
 .movie-review-button-container > button {
     width: 200px;
     margin-left: 30px;
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    border: none;
+}
+
+.movie-review-button-container > button:hover {
+  background-color: black;
+  color: gold;
+  font-weight: bold;
 }
 
 .view-toggle-button-container {
@@ -92,11 +102,14 @@ body {
   .view-toggle-button-container button {
     font-size: 14px;
     padding: 8px 16px;
+    background-color: gold;
+    color: black;
+    font-weight: bold;
   }
 
   .view-toggle-button-container > button:hover {
-    background-color: gold;
-    color: black;
+    background-color: black;
+    color: gold;
     font-weight: bold;
   }
   
