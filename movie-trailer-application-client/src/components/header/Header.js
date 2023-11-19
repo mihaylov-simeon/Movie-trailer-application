@@ -24,7 +24,7 @@ const Header = () => {
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand to="/" as={NavLink} style={{ color: "white" }}>
-          <FontAwesomeIcon icon={faPhotoVideo} /> Movie Trailers
+          <FontAwesomeIcon icon={faPhotoVideo} /> The Movie Trailers Spot
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
