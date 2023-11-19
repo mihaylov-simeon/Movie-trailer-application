@@ -1,4 +1,4 @@
-package com.moveiapp.final_exam_projectmovieapplication.service.impl;
+package com.moveiapp.final_exam_projectmovieapplication.service;
 
 import lombok.Getter;
 import org.springframework.stereotype.Component;

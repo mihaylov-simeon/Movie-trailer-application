@@ -1,7 +1,7 @@
 package com.moveiapp.final_exam_projectmovieapplication.controllers;
 
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.Review;
-import com.moveiapp.final_exam_projectmovieapplication.service.ReviewService;
+import com.moveiapp.final_exam_projectmovieapplication.service.impl.ReviewServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +12,9 @@ import java.util.Map;
 @RequestMapping("/Reviews")
 @CrossOrigin(origins = "http://localhost:8080")
 public class ReviewController {
-    private final ReviewService service;
+    private final ReviewServiceImpl service;
 
-    public ReviewController(ReviewService service) {
+    public ReviewController(ReviewServiceImpl service) {
         this.service = service;
     }
 

@@ -1,18 +1,20 @@
 package com.moveiapp.final_exam_projectmovieapplication;
 
-import com.moveiapp.final_exam_projectmovieapplication.service.DataImportService;
+import com.moveiapp.final_exam_projectmovieapplication.service.impl.DataImportServiceImpl;
 import jakarta.annotation.PostConstruct;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.io.IOException;
 
 
 @SpringBootApplication
 public class FinalExamProjectMovieApplication {
 
-    private final DataImportService dataImportService;
+    private final DataImportServiceImpl dataImportServiceImpl;
 
-    public FinalExamProjectMovieApplication(DataImportService dataImportService) {
-        this.dataImportService = dataImportService;
+    public FinalExamProjectMovieApplication(DataImportServiceImpl dataImportServiceImpl) {
+        this.dataImportServiceImpl = dataImportServiceImpl;
     }
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class FinalExamProjectMovieApplication {
     }
 
     @PostConstruct
-    public void init() {
-        dataImportService.importDataFromJson();
+    public void init() throws IOException {
+        dataImportServiceImpl.importDataFromJson();
     }
 }

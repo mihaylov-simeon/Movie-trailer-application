@@ -1,7 +1,7 @@
 package com.moveiapp.final_exam_projectmovieapplication.controllers;
 
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.Movie;
-import com.moveiapp.final_exam_projectmovieapplication.service.MovieService;
+import com.moveiapp.final_exam_projectmovieapplication.service.impl.MovieServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +18,9 @@ import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:8080")
 public class MovieController {
 
-    private final MovieService service;
+    private final MovieServiceImpl service;
 
-    public MovieController(MovieService service) {
+    public MovieController(MovieServiceImpl service) {
         this.service = service;
     }
 

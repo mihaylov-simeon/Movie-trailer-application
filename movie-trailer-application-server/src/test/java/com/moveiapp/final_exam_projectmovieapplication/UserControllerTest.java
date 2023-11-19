@@ -3,7 +3,7 @@ package com.moveiapp.final_exam_projectmovieapplication;
 import com.moveiapp.final_exam_projectmovieapplication.controllers.UserController;
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserRegistrationDTO;
 import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
-import com.moveiapp.final_exam_projectmovieapplication.service.impl.LoggedUser;
+import com.moveiapp.final_exam_projectmovieapplication.service.LoggedUser;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

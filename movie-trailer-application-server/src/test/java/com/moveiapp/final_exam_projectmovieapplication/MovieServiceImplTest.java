@@ -2,7 +2,7 @@ package com.moveiapp.final_exam_projectmovieapplication;
 
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.Movie;
 import com.moveiapp.final_exam_projectmovieapplication.repositories.MovieRepository;
-import com.moveiapp.final_exam_projectmovieapplication.service.MovieService;
+import com.moveiapp.final_exam_projectmovieapplication.service.impl.MovieServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -15,10 +15,10 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class MovieServiceTest {
+public class MovieServiceImplTest {
 
     @InjectMocks
-    private MovieService movieService;
+    private MovieServiceImpl movieServiceImpl;
 
     @Mock
     private MovieRepository movieRepository;
@@ -36,7 +36,7 @@ public class MovieServiceTest {
         Mockito.when(movieRepository.findMovieByImdbId(imdbId)).thenReturn(Optional.of(expectedMovie));
 
         // Call the service method
-        Optional<Movie> result = movieService.findMovieByImdbId(imdbId);
+        Optional<Movie> result = movieServiceImpl.findMovieByImdbId(imdbId);
 
         // Assert that the result is not empty and contains the expected movie
         assertTrue(result.isPresent());
@@ -50,7 +50,7 @@ public class MovieServiceTest {
         Mockito.when(movieRepository.findMovieByImdbId(imdbId)).thenReturn(Optional.empty());
 
         // Call the service method
-        Optional<Movie> result = movieService.findMovieByImdbId(imdbId);
+        Optional<Movie> result = movieServiceImpl.findMovieByImdbId(imdbId);
 
         // Assert that the result is empty
         assertTrue(result.isEmpty());

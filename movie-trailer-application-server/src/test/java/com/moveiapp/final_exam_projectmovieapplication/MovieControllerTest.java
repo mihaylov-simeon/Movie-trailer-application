@@ -2,7 +2,7 @@ package com.moveiapp.final_exam_projectmovieapplication;
 
 import com.moveiapp.final_exam_projectmovieapplication.controllers.MovieController;
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.Movie;
-import com.moveiapp.final_exam_projectmovieapplication.service.MovieService;
+import com.moveiapp.final_exam_projectmovieapplication.service.impl.MovieServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 class MovieControllerTest {
 
     @Mock
-    private MovieService movieService;
+    private MovieServiceImpl movieServiceImpl;
 
     @InjectMocks
     private MovieController movieController;
@@ -33,7 +33,7 @@ class MovieControllerTest {
     void getMovies() throws Exception {
         // Arrange
         List<Movie> movies = Collections.singletonList(new Movie());
-        when(movieService.findAllMovies()).thenReturn(movies);
+        when(movieServiceImpl.findAllMovies()).thenReturn(movies);
 
         // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
@@ -47,7 +47,7 @@ class MovieControllerTest {
         // Arrange
         String imdbId = "exampleImdbId";
         Movie movie = new Movie();
-        when(movieService.findMovieByImdbId(imdbId)).thenReturn(Optional.of(movie));
+        when(movieServiceImpl.findMovieByImdbId(imdbId)).thenReturn(Optional.of(movie));
 
         // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
@@ -60,7 +60,7 @@ class MovieControllerTest {
     void getSingleMovie_NotFound() throws Exception {
         // Arrange
         String imdbId = "nonExistingImdbId";
-        when(movieService.findMovieByImdbId(imdbId)).thenReturn(Optional.empty());
+        when(movieServiceImpl.findMovieByImdbId(imdbId)).thenReturn(Optional.empty());
 
         // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();

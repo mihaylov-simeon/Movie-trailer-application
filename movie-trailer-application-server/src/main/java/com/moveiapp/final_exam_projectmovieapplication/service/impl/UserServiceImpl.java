@@ -6,6 +6,7 @@ import com.moveiapp.final_exam_projectmovieapplication.model.entities.FavoriteMo
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.User;
 import com.moveiapp.final_exam_projectmovieapplication.repositories.FavoriteMovieRepository;
 import com.moveiapp.final_exam_projectmovieapplication.repositories.UserRepository;
+import com.moveiapp.final_exam_projectmovieapplication.service.LoggedUser;
 import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
