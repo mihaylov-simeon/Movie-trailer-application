@@ -4,7 +4,7 @@
 
 In order to run it, you will need **React setup for the Client side.**
 
-Please run the following commands in your Intellij/VsCode (depending from where you are launching the client-side Terminal:
+Please run the following commands in your Intellij/VsCode:
 
 ### npx create-react-app movie-trailer-application
 ### npm install axios
