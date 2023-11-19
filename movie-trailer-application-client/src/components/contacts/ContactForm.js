@@ -49,7 +49,7 @@ const ContactForm = () => {
         <div className="label-text-contacts">Last Name</div>
       </label>
       <label className='contact-label'>
-        <input name='email' type="email" className='input-contacts' required />
+        <input name='email' type="text" className='input-contacts' required />
         <div className="label-text-contacts">Email Address</div>
       </label>
       <label className='contact-label'>
