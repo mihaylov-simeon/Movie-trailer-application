@@ -10,6 +10,5 @@ import java.util.List;
 @Repository
 public interface FavoriteMovieRepository extends JpaRepository<FavoriteMovie, Long> {
     List<FavoriteMovie> findByUser(User user);
-
-    void deleteByUserAndImdbId(User user, String imdbId);
+    FavoriteMovie findByImdbIdAndUser(String imdbId, User user);
 }

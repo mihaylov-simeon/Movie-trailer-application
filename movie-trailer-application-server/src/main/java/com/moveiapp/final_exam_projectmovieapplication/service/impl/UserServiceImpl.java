@@ -115,4 +115,21 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public void removeFavoriteMovie(String imdbId) {
+        // Get the currently logged-in user
+        User user = userRepository.findByEmail(loggedUser.getEmail());
+
+        if (user != null) {
+            // Find the favorite movie by imdbId and user
+            FavoriteMovie favoriteMovie = favoriteMovieRepository.findByImdbIdAndUser(imdbId, user);
+
+            if (favoriteMovie != null) {
+                // Remove the favorite movie
+                favoriteMovieRepository.delete(favoriteMovie);
+            }
+        }
+    }
+
 }

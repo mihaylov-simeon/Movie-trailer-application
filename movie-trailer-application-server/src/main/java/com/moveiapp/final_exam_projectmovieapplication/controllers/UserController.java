@@ -11,7 +11,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -104,6 +106,14 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<List<FavoriteMovie>> addFavoriteMovie(@RequestBody FavoriteMovieDTO movieDTO) {
         userService.addFavoriteMovie(movieDTO.getImdbId(), movieDTO.getTitle(), movieDTO.getPoster());
+        List<FavoriteMovie> favoriteMovies = userService.getFavoriteMovies();
+        return ResponseEntity.ok(favoriteMovies);
+    }
+
+    @DeleteMapping("/remove-favorite/{imdbId}")
+    @ResponseBody
+    public ResponseEntity<List<FavoriteMovie>> removeFavoriteMovie(@PathVariable String imdbId) {
+        userService.removeFavoriteMovie(imdbId);
         List<FavoriteMovie> favoriteMovies = userService.getFavoriteMovies();
         return ResponseEntity.ok(favoriteMovies);
     }

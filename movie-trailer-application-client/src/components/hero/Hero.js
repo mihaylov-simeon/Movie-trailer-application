@@ -13,43 +13,43 @@ import axiosConfig from '../../api/axiosConfig';
 const Hero = ({ movies }) => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
-  const { favorites, error } = useFavorites(); // Use the custom hook
+  const { favorites } = useFavorites(); // Use the custom hook
   const [isGridView, setIsGridView] = useState(false);
 
   const toggleViewMode = () => {
     setIsGridView((prev) => !prev);
   };
+  
 
   const addToFavorites = async (movie) => {
     try {
-      if (!isLoggedIn) {
-        navigate('/login');
-        return;
-      }
+        if (!isLoggedIn) {
+            navigate('/login');
+            return;
+        }
 
-      // Check if the movie is already in favorites
-      const isMovieInFavorites = favorites.some((favorite) => favorite.imdbId === movie.imdbId);
+        // Check if the movie is already in favorites
+        const isMovieInFavorites = favorites.some((favorite) => favorite.imdbId === movie.imdbId);
 
-      if (isMovieInFavorites) {
-        // Display an alert if the movie is already in favorites
-        alert('This movie is already in your list of favorite movies.');
-      } else {
-        // Proceed with adding the movie to favorites
-        console.log('Adding to favorites:', movie);
-        const response = await axiosConfig.post('/add-favorite', {
-          imdbId: movie.imdbId,
-          title: movie.title,
-          poster: movie.poster,
-        });
+        if (isMovieInFavorites) {
+            // If the movie is already in favorites, remove it
+            await axiosConfig.delete(`/remove-favorite/${movie.imdbId}`);
+            console.log('Movie removed from favorites:', movie.imdbId);
+            alert('Movie removed from favorites!');
+        } else {
+            // If the movie is not in favorites, add it
+            const response = await axiosConfig.post('/add-favorite', {
+                imdbId: movie.imdbId,
+                title: movie.title,
+                poster: movie.poster,
+            });
 
-        // Display an alert for successful addition
-        alert('Movie added to favorites!');
-        console.log('Movie added to favorites:', response.data);
-      }
+            console.log('Movie added to favorites:', response.data);
+        }
     } catch (error) {
-      console.error('Error adding movie to favorites:', error);
+        console.error('Error updating favorites:', error);
     }
-  };
+};
 
   function reviews(movieId) {
     navigate(`Reviews/${movieId}`);
@@ -74,6 +74,11 @@ const Hero = ({ movies }) => {
                   icon={faHeart}
                   className="heart-icon"
                   onClick={() => addToFavorites(movie)}
+                  style={{
+                    color: isLoggedIn && favorites.some((favorite) => favorite.imdbId === movie.imdbId)
+                      ? 'red'
+                      : '#ffffff',
+                  }}
                 />
               )}
             </div>
@@ -99,12 +104,17 @@ const Hero = ({ movies }) => {
                         </div>
                       </Link>
                       {isLoggedIn && (
-                        <FontAwesomeIcon
-                          icon={faHeart}
-                          className="heart-icon"
-                          onClick={() => addToFavorites(movie)}
-                        />
-                      )}
+                <FontAwesomeIcon
+                  icon={faHeart}
+                  className="heart-icon"
+                  onClick={() => addToFavorites(movie)}
+                  style={{
+                    color: isLoggedIn && favorites.some((favorite) => favorite.imdbId === movie.imdbId)
+                      ? 'red'
+                      : '#ffffff',
+                  }}
+                />
+              )}
                       <div className="movie-review-button-container">
                         {isLoggedIn && (
                         <Button variant="info" onClick={() => reviews(movie.imdbId)}>
