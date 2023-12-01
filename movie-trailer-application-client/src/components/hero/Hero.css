@@ -17,8 +17,8 @@ body {
 .movie-poster > img {
     height: 100%;
     width: 100%;
-    border: 2px solid transparent;
-    border-radius: 10px;
+    border: 3px solid transparent;
+    border-radius: 20px;
     transition: border-color 0.5s ease;
 }
 
@@ -136,7 +136,7 @@ body {
   .movie-grid-item img:hover {
     width: 99%;
     transition: 0.5s;
-    border: 2px solid gold;
+    border: 3px solid gold;
   }
 
   .movie-grid-item h4 {
