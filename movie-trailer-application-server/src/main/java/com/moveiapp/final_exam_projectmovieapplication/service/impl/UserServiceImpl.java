@@ -32,17 +32,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean register(UserRegistrationDTO userRegistrationDTO) {
         boolean existsByUsernameOrEmail = userRepository.existsByNameAndEmail(
-                userRegistrationDTO.name(),
-                userRegistrationDTO.email());
+                userRegistrationDTO.getName(),
+                userRegistrationDTO.getEmail());
 
         if (existsByUsernameOrEmail) {
             return false;
         }
 
         User user = new User();
-        user.setName(userRegistrationDTO.name());
-        user.setEmail(userRegistrationDTO.email());
-        user.setPassword(passwordEncoder.encode(userRegistrationDTO.password()));
+        user.setName(userRegistrationDTO.getName());
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
 
         userRepository.save(user);
 
@@ -130,6 +130,16 @@ public class UserServiceImpl implements UserService {
                 // Remove the favorite movie
                 favoriteMovieRepository.delete(favoriteMovie);
             }
+        }
+    }
+
+    @Override
+    public void updateUserName(String email, String name) {
+        User user = userRepository.findByEmail(email);
+
+        if (user != null) {
+            user.setName(name);
+            userRepository.save(user);
         }
     }
 

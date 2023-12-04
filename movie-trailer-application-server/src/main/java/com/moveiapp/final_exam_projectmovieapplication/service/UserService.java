@@ -21,4 +21,6 @@ public interface UserService {
     UserRegistrationDTO getUserDetailsByEmail(String email);
 
     void removeFavoriteMovie(String imdbId);
+
+    void updateUserName(String email, String name);
 }

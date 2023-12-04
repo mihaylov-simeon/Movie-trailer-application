@@ -4,19 +4,22 @@ import com.moveiapp.final_exam_projectmovieapplication.model.dto.FavoriteMovieDT
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserLoginDTO;
 import com.moveiapp.final_exam_projectmovieapplication.model.dto.UserRegistrationDTO;
 import com.moveiapp.final_exam_projectmovieapplication.model.entities.FavoriteMovie;
-import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import com.moveiapp.final_exam_projectmovieapplication.service.LoggedUser;
+import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Collections;
@@ -25,12 +28,11 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     private final UserService userService;
     private final LoggedUser loggedUser;
-
-
 
     public UserController(UserService userService, LoggedUser loggedUser) {
         this.userService = userService;
@@ -117,5 +119,53 @@ public class UserController {
         List<FavoriteMovie> favoriteMovies = userService.getFavoriteMovies();
         return ResponseEntity.ok(favoriteMovies);
     }
+
+    @RequestMapping("/user")
+    @ResponseBody
+    public ResponseEntity<?> getUserDetails() {
+        try {
+            if (loggedUser.isLogged()) {
+                UserRegistrationDTO userDetails = userService.getUserDetailsByEmail(loggedUser.getEmail());
+
+                if (userDetails != null) {
+                    Map<String, Object> response = new HashMap<>();
+                    response.put("email", userDetails.getEmail());
+                    response.put("name", userDetails.getName());
+
+                    return ResponseEntity.ok().body(response);
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.emptyMap());
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.emptyMap());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyMap());
+        }
+    }
+
+    // UserController.java
+
+    // UserController.java
+
+    @PutMapping("/user")
+    @ResponseBody
+    public ResponseEntity<?> updateUserName(@RequestBody UserRegistrationDTO userRegistrationDTO) {
+        try {
+            if (loggedUser.isLogged()) {
+                // Assuming you have a service method to update the user's name
+                userService.updateUserName(loggedUser.getEmail(), userRegistrationDTO.getName());
+                return ResponseEntity.ok().body("Name updated successfully");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User is not logged in.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update name");
+        }
+    }
+
+
 }
 
