@@ -1,3 +1,5 @@
+// AuthProvider.js
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axiosConfig from "../../api/axiosConfig";
 
@@ -5,43 +7,57 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [name, setUserName] = useState(""); // New state to store user's name
+  const [name, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const updateName = (newName) => {
+    setUserName(newName);
+    // update the local storage to persist changes with the updated name
+    localStorage.setItem('name', newName);
+  };
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      setIsLoggedIn(true);
       const storedUserName = localStorage.getItem('name');
-      setUserName(storedUserName || "");
-    }
-  }, []);
+      const storedEmail = localStorage.getItem('email');
 
-  const login = (name) => {
+      if (storedUserName) {
+        setUserName(storedUserName);
+      }
+
+      if (storedEmail) {
+        setEmail(storedEmail);
+      }
+
+      setIsLoggedIn(true);
+    }
+  }, []); // No dependencies, so it runs only once on mount
+
+  const login = (name, email) => {
     setIsLoggedIn(true);
     setUserName(name);
+    setEmail(email);
     localStorage.setItem('authToken', 'yourAuthToken');
-    localStorage.setItem('name', name); // Store the user's name in localStorage
+    localStorage.setItem('name', name);
+    localStorage.setItem('email', email);
   };
-
 
   const logout = async () => {
     try {
-      // Call the backend API to mark the user as active: false
       await axiosConfig.post("/logout");
     } catch (error) {
       console.error("Logout failed:", error);
     }
 
-    // Clear the authentication state
     setIsLoggedIn(false);
-
-    // Clear the token from local storage
     localStorage.removeItem('authToken');
     localStorage.removeItem('name');
+    localStorage.removeItem('email');
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout, name }}>
+    <AuthContext.Provider value={{ isLoggedIn, login, logout, name, email, updateName }}>
       {children}
     </AuthContext.Provider>
   );

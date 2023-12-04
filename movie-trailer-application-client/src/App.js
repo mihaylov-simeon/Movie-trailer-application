@@ -13,6 +13,7 @@ import SearchBar from './components/search/SearchBar';
 import AboutUs from './components/aboutus/AboutUs';
 import Favorites from './components/favorites/Favorites';
 import ContactForm from './components/contacts/ContactForm'
+import User from './components/user/User'
 import { AuthProvider } from "./components/authentication/AuthProvider";
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
             <Route path="/aboutUs" element={<AboutUs />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/contactUs" element={<ContactForm />} />
+            <Route path="/user" element={<User />} />
           </Route>
         </Routes>
       </AuthProvider>

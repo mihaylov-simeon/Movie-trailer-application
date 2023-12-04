@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhotoVideo } from "@fortawesome/free-solid-svg-icons";
 import Button from "react-bootstrap/Button";
@@ -11,7 +11,12 @@ import "./Header.css";
 
 const Header = () => {
   const { isLoggedIn, logout, name } = useAuth();
+  const [displayName, setDisplayName] = useState(name);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setDisplayName(name);
+  }, [name]);
 
   const handleLogout = () => {
     // Call the logout function from the AuthProvider
@@ -45,6 +50,9 @@ const Header = () => {
             <NavLink className="nav-link" to="/contactUs">
               Contact Us
             </NavLink>
+            <NavLink className="nav-link" to="/user">
+              Profile
+            </NavLink>
             
           </Nav>
           {!isLoggedIn && (
@@ -54,7 +62,7 @@ const Header = () => {
           )}
           {isLoggedIn && (
             <div className="me-2" style={{ color: "white" }}>
-               <span>Hello, {name}!</span>
+               <span>Hello, {displayName}!</span>
             </div>
           )}
           {isLoggedIn && (

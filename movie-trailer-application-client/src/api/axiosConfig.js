@@ -3,7 +3,6 @@ import axios from 'axios';
 const axiosConfig = axios.create({
   baseURL: 'http://localhost:8080',
   withCredentials: true,
-  headers: {"skip-browser-warning": "true"}
 });
 
 // Request interceptor
