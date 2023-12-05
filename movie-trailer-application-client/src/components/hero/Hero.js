@@ -9,51 +9,71 @@ import Button from 'react-bootstrap/Button';
 import { useAuth } from '../authentication/AuthProvider';
 import useFavorites from '../favorites/useFavorites';
 import axiosConfig from '../../api/axiosConfig';
+import { Dropdown } from 'react-bootstrap';
+import MemoizedDropdownItem from './MemorizedDropdownItem';
 
 const Hero = ({ movies }) => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const { favorites } = useFavorites(); // Use the custom hook
   const [isGridView, setIsGridView] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState('All');
 
   const toggleViewMode = () => {
     setIsGridView((prev) => !prev);
   };
-  
+
+  const handleGenreSelect = (genre) => {
+    console.log("Selected genre: ", genre)
+    setSelectedGenre(genre);
+  };
+
+  const filterMoviesByGenre = () => {
+    if (selectedGenre === 'All') {
+      return movies;
+    } else {
+      console.log('Selected Genre:', selectedGenre);
+      const filteredMovies = movies.filter((movie) => movie.genres.includes(selectedGenre));
+      console.log('Filtered Movies:', filteredMovies);
+      return filteredMovies;
+    }
+  };
 
   const addToFavorites = async (movie) => {
     try {
-        if (!isLoggedIn) {
-            navigate('/login');
-            return;
-        }
+      if (!isLoggedIn) {
+        navigate('/login');
+        return;
+      }
 
-        // Check if the movie is already in favorites
-        const isMovieInFavorites = favorites.some((favorite) => favorite.imdbId === movie.imdbId);
+      // Check if the movie is already in favorites
+      const isMovieInFavorites = favorites.some((favorite) => favorite.imdbId === movie.imdbId);
 
-        if (isMovieInFavorites) {
-            // If the movie is already in favorites, remove it
-            await axiosConfig.delete(`/remove-favorite/${movie.imdbId}`);
-            console.log('Movie removed from favorites:', movie.imdbId);
-            alert('Movie removed from favorites!');
-        } else {
-            // If the movie is not in favorites, add it
-            const response = await axiosConfig.post('/add-favorite', {
-                imdbId: movie.imdbId,
-                title: movie.title,
-                poster: movie.poster,
-            });
+      if (isMovieInFavorites) {
+        // If the movie is already in favorites, remove it
+        await axiosConfig.delete(`/remove-favorite/${movie.imdbId}`);
+        console.log('Movie removed from favorites:', movie.imdbId);
+        alert('Movie removed from favorites!');
+      } else {
+        // If the movie is not in favorites, add it
+        const response = await axiosConfig.post('/add-favorite', {
+          imdbId: movie.imdbId,
+          title: movie.title,
+          poster: movie.poster,
+        });
 
-            console.log('Movie added to favorites:', response.data);
-        }
+        console.log('Movie added to favorites:', response.data);
+      }
     } catch (error) {
-        console.error('Error updating favorites:', error);
+      console.error('Error updating favorites:', error);
     }
-};
+  };
 
   function reviews(movieId) {
     navigate(`Reviews/${movieId}`);
   }
+
+  const genres = ['All', 'Action', 'Comedy', 'Adventure', 'Fantasy', 'Family', 'Science Fiction', 'Horror', 'Drama'];
 
   return (
     <div className="movie-carousel-container">
@@ -61,11 +81,23 @@ const Hero = ({ movies }) => {
         <Button variant="outline-secondary" onClick={toggleViewMode}>
           {isGridView ? 'Switch to Carousel' : 'Switch to Grid View'}
         </Button>
+        <Dropdown>
+            <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
+              Filter by Genre: {selectedGenre}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {genres.map((genre) => (
+                <MemoizedDropdownItem key={genre} onClick={handleGenreSelect} genre={genre} />
+              ))}
+        </Dropdown.Menu>
+      </Dropdown>
       </div>
+
 
       {isGridView ? (
         <div className="movie-grid-container">
-          {movies?.map((movie) => (
+          {filterMoviesByGenre().map((movie) => (
             <div key={movie.imdbId} className="movie-grid-item">
               <img src={movie.poster} alt={movie.title} />
               <h4>{movie.title}</h4>
@@ -86,7 +118,7 @@ const Hero = ({ movies }) => {
         </div>
       ) : (
         <Carousel>
-          {movies?.map((movie) => (
+          {filterMoviesByGenre().map((movie) => (
             <Paper key={movie.imdbId}>
               <div className="movie-card-container">
                 <div className="movie-card" style={{ '--img': `url(${movie.backdrops[0]})` }}>
@@ -104,24 +136,23 @@ const Hero = ({ movies }) => {
                         </div>
                       </Link>
                       {isLoggedIn && (
-                <FontAwesomeIcon
-                  icon={faHeart}
-                  className="heart-icon"
-                  onClick={() => addToFavorites(movie)}
-                  style={{
-                    color: isLoggedIn && favorites.some((favorite) => favorite.imdbId === movie.imdbId)
-                      ? 'red'
-                      : '#ffffff',
-                  }}
-                />
-              )}
+                        <FontAwesomeIcon
+                          icon={faHeart}
+                          className="heart-icon"
+                          onClick={() => addToFavorites(movie)}
+                          style={{
+                            color: isLoggedIn && favorites.some((favorite) => favorite.imdbId === movie.imdbId)
+                              ? 'red'
+                              : '#ffffff',
+                          }}
+                        />
+                      )}
                       <div className="movie-review-button-container">
                         {isLoggedIn && (
-                        <Button variant="info" onClick={() => reviews(movie.imdbId)}>
-                          Reviews
-                        </Button>
-                        )
-                        }
+                          <Button variant="info" onClick={() => reviews(movie.imdbId)}>
+                            Reviews
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </div>

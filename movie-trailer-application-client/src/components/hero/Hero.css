@@ -97,22 +97,25 @@ body {
 }
 
 .view-toggle-button-container {
-    margin: 0px 0px 10px 10px;
-  }
-  
-  .view-toggle-button-container button {
-    font-size: 14px;
-    padding: 8px 16px;
-    background-color: gold;
-    color: black;
-    font-weight: bold;
-  }
+  margin: 10px; /* Adjusted margin to provide some spacing */
+  display: flex; /* Added display flex to have buttons in a row */
+  align-items: center; /* Center items vertically */
+}
 
-  .view-toggle-button-container > button:hover {
-    background-color: black;
-    color: gold;
-    font-weight: bold;
-  }
+.view-toggle-button-container button {
+  font-size: 14px;
+  padding: 8px 16px;
+  background-color: gold;
+  color: black;
+  font-weight: bold;
+  margin-right: 10px; /* Added margin between the two buttons */
+}
+
+.view-toggle-button-container button:hover {
+  background-color: black;
+  color: gold;
+  font-weight: bold;
+}
   
 .movie-grid-container {
     display: grid;
