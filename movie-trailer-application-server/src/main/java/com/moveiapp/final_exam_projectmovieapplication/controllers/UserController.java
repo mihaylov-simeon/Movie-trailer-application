@@ -145,10 +145,6 @@ public class UserController {
         }
     }
 
-    // UserController.java
-
-    // UserController.java
-
     @PutMapping("/user")
     @ResponseBody
     public ResponseEntity<?> updateUserName(@RequestBody UserRegistrationDTO userRegistrationDTO) {
