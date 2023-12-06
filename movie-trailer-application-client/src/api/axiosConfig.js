@@ -8,12 +8,20 @@ const axiosConfig = axios.create({
 // Request interceptor
 axiosConfig.interceptors.request.use(
   (config) => {
-    // log request data into the console
-    console.log('Request Interceptor:', config);
+    // Exclude the password from the logs
+    if (config.data && config.data.password) {
+      const sanitizedConfig = { ...config };
+      sanitizedConfig.data = {
+        ...sanitizedConfig.data,
+        password: '****** (hidden)',
+      };
+      console.log('Request Interceptor:', sanitizedConfig);
+    } else {
+      console.log('Request Interceptor:', config);
+    }
     return config;
   },
   (error) => {
-    // Handle request errors
     console.error('Request Interceptor Error:', error);
     return Promise.reject(error);
   }
