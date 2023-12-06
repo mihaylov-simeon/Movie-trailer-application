@@ -19,7 +19,17 @@ const useFavorites = () => {
     fetchFavorites();
   }, []);
 
-  return { favorites, error };
+  const updateFavorites = async () => {
+    try {
+      const response = await axiosConfig.get('/favorites');
+      setFavorites(response.data);
+    } catch (error) {
+      console.error('Error updating favorites:', error);
+      setError(error.message || 'An error occurred while updating favorites.');
+    }
+  };
+
+  return { favorites, setFavorites, error, updateFavorites };
 };
 
 export default useFavorites;

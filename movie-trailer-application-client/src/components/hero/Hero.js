@@ -15,7 +15,7 @@ import MemoizedDropdownItem from './MemorizedDropdownItem';
 const Hero = ({ movies }) => {
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
-  const { favorites } = useFavorites(); // Use the custom hook
+  const { favorites, setFavorites, error, updateFavorites } = useFavorites();
   const [isGridView, setIsGridView] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState('All');
 
@@ -62,6 +62,8 @@ const Hero = ({ movies }) => {
           poster: movie.poster,
         });
 
+        setFavorites((prevFavorites) => [...prevFavorites, response.data]);
+        updateFavorites();
         console.log('Movie added to favorites:', response.data);
       }
     } catch (error) {
