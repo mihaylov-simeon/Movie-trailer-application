@@ -30,5 +30,3 @@ You can run the server side from the **FinalExamProjectMovieApplication.class** 
 
 That's it - Enjoy.
 
-<img width="855" alt="image" src="https://github.com/mihaylov-simeon/Movie-trailer-application/assets/75495411/b42459f8-10e7-427f-82fc-ead2d771d576">
-
