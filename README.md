@@ -29,3 +29,6 @@ You can run the server side from the **FinalExamProjectMovieApplication.class** 
 !!!! Note that the Server and Client side need to be running simultaneously, in order for the application to work properly.
 
 That's it - Enjoy.
+
+<img width="855" alt="image" src="https://github.com/mihaylov-simeon/Movie-trailer-application/assets/75495411/b42459f8-10e7-427f-82fc-ead2d771d576">
+
