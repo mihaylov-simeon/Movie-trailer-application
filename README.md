@@ -29,3 +29,4 @@ You can run the server side from the **FinalExamProjectMovieApplication.class** 
 !!!! Note that the Server and Client side need to be running simultaneously, in order for the application to work properly.
 
 That's it - Enjoy.
+
