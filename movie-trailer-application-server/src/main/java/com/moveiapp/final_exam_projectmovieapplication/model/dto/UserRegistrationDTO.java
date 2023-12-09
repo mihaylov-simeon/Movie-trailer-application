@@ -4,17 +4,24 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class UserRegistrationDTO {
-    @NotEmpty String name;
-    @NotNull @Email String email;
+
+    @NotEmpty
+    String name;
+    @NotNull @Email
+    String email;
     String password;
+
+    public UserRegistrationDTO() {
+    }
 
     public UserRegistrationDTO(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
-
 }
