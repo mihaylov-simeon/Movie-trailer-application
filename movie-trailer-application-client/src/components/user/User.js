@@ -3,11 +3,12 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "../authentication/AuthProvider";
 import axiosConfig from "../../api/axiosConfig";
+import './User.css'
 
 const User = () => {
   const { name: initialName, email: initialEmail, updateName } = useAuth();
-  const [name, setName] = useState(initialName);
-  const [email, setEmail] = useState(initialEmail); 
+  const [name, setName] = useState(initialName || '');  // Initialize with an empty string
+  const [email, setEmail] = useState(initialEmail || '');  // Initialize with an empty string
 
   useEffect(() => {
     // Fetch user information when the component mounts
@@ -37,20 +38,20 @@ const User = () => {
         console.error("Error updating name:", error);
       });
   };
+
   return (
-    <div>
-      <h2>User</h2>
-      <Form>
+    <div className="user-container">
+      <h2>User Profile</h2>
+      <Form className="user-form">
         <Form.Group className="mb-3">
           <Form.Label>Email:</Form.Label>
           <Form.Control type="text" value={email} readOnly />
         </Form.Group>
-        {/* Remove the password field as it's not needed */}
         <Form.Group className="mb-3">
           <Form.Label>Name:</Form.Label>
           <Form.Control type="text" value={name} onChange={handleNameChange} />
         </Form.Group>
-        <Button variant="primary" onClick={handleUpdateName}>
+        <Button className="update-name-btn" variant="primary" onClick={handleUpdateName}>
           Update Name
         </Button>
       </Form>
