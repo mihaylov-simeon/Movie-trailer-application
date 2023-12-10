@@ -51,7 +51,6 @@ class UserLogoutTest {
         verify(loggedUser).logout();
     }
 
-    // Helper method to convert objects to JSON string
     private String asJsonString(Object object) {
         try {
             return new ObjectMapper().writeValueAsString(object);

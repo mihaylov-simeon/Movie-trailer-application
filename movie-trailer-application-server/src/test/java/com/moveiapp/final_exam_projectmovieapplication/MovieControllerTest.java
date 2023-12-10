@@ -44,12 +44,10 @@ class MovieControllerTest {
 
     @Test
     void getSingleMovie() throws Exception {
-        // Arrange
         String imdbId = "exampleImdbId";
         Movie movie = new Movie();
         when(movieServiceImpl.findMovieByImdbId(imdbId)).thenReturn(Optional.of(movie));
 
-        // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movies/{imdbId}", imdbId)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -58,11 +56,9 @@ class MovieControllerTest {
 
     @Test
     void getSingleMovie_NotFound() throws Exception {
-        // Arrange
         String imdbId = "nonExistingImdbId";
         when(movieServiceImpl.findMovieByImdbId(imdbId)).thenReturn(Optional.empty());
 
-        // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movies/{imdbId}", imdbId)
                         .contentType(MediaType.APPLICATION_JSON))

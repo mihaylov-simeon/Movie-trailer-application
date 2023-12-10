@@ -31,7 +31,6 @@ class ReviewControllerTest {
 
     @Test
     void testCreateReview() {
-        // Mock the behavior of the reviewService
         Map<String, String> payload = new HashMap<>();
         payload.put("reviewBody", "This is a review");
         payload.put("imdbId", "12345");
@@ -39,10 +38,8 @@ class ReviewControllerTest {
         Review mockReview = new Review();
         Mockito.when(reviewServiceImpl.createReview("This is a review", "12345")).thenReturn(mockReview);
 
-        // Call the controller method
         ResponseEntity<Review> response = reviewController.createReview(payload);
 
-        // Verify the response
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(mockReview, response.getBody());
     }

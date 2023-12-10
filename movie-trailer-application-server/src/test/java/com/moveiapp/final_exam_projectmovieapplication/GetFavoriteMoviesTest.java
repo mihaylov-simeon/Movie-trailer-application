@@ -50,7 +50,6 @@ class GetFavoriteMoviesTest {
         verify(userService).getFavoriteMovies();
     }
 
-    // Helper method to convert objects to JSON string
     private String asJsonString(Object object) {
         try {
             return new ObjectMapper().writeValueAsString(object);

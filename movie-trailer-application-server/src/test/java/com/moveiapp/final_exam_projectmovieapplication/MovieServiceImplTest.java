@@ -30,29 +30,23 @@ public class MovieServiceImplTest {
 
     @Test
     public void testFindMovieByImdbId() {
-        // Mock the behavior of the repository to return an Optional with a Movie
         String imdbId = "tt123456";
         Movie expectedMovie = new Movie();
         Mockito.when(movieRepository.findMovieByImdbId(imdbId)).thenReturn(Optional.of(expectedMovie));
 
-        // Call the service method
         Optional<Movie> result = movieServiceImpl.findMovieByImdbId(imdbId);
 
-        // Assert that the result is not empty and contains the expected movie
         assertTrue(result.isPresent());
         assertEquals(expectedMovie, result.get());
     }
 
     @Test
     public void testFindMovieByImdbId_NotFound() {
-        // Mock the behavior of the repository to return an empty Optional
         String imdbId = "tt789012";
         Mockito.when(movieRepository.findMovieByImdbId(imdbId)).thenReturn(Optional.empty());
 
-        // Call the service method
         Optional<Movie> result = movieServiceImpl.findMovieByImdbId(imdbId);
 
-        // Assert that the result is empty
         assertTrue(result.isEmpty());
     }
 }
