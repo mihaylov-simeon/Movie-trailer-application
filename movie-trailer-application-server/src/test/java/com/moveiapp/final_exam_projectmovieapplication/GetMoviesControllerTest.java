@@ -21,7 +21,7 @@ import java.util.Optional;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class MovieControllerTest {
+class GetMoviesControllerTest {
 
     @Mock
     private MovieServiceImpl movieServiceImpl;
@@ -31,11 +31,9 @@ class MovieControllerTest {
 
     @Test
     void getMovies() throws Exception {
-        // Arrange
         List<Movie> movies = Collections.singletonList(new Movie());
         when(movieServiceImpl.findAllMovies()).thenReturn(movies);
 
-        // Act & Assert
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(movieController).build();
         mockMvc.perform(MockMvcRequestBuilders.get("/api/movies")
                         .contentType(MediaType.APPLICATION_JSON))

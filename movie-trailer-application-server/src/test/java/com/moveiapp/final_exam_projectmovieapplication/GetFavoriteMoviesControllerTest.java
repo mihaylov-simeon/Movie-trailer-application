@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-class GetFavoriteMoviesTest {
+class GetFavoriteMoviesControllerTest {
 
     @Mock
     private UserService userService;
@@ -46,6 +46,17 @@ class GetFavoriteMoviesTest {
         mockMvc.perform(get("/favorites"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(asJsonString(favoriteMovies)));
+
+        verify(userService).getFavoriteMovies();
+    }
+
+    @Test
+    void getFavoriteMovies_Exception() throws Exception {
+        when(userService.getFavoriteMovies()).thenThrow(new RuntimeException("Something went wrong"));
+
+        mockMvc.perform(get("/favorites"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(content().json("[]"));
 
         verify(userService).getFavoriteMovies();
     }

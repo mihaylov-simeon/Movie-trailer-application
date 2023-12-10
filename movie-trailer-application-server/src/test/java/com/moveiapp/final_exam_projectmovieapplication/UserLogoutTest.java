@@ -1,9 +1,8 @@
 package com.moveiapp.final_exam_projectmovieapplication;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.moveiapp.final_exam_projectmovieapplication.controllers.UserController;
-import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import com.moveiapp.final_exam_projectmovieapplication.service.LoggedUser;
+import com.moveiapp.final_exam_projectmovieapplication.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,13 +48,5 @@ class UserLogoutTest {
         verify(loggedUser).isLogged();
         verify(userService).logout(loggedUser.getEmail());
         verify(loggedUser).logout();
-    }
-
-    private String asJsonString(Object object) {
-        try {
-            return new ObjectMapper().writeValueAsString(object);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

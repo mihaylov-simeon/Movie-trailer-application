@@ -16,7 +16,6 @@ class UserLoginTest {
 
     @Test
     void login_SuccessfulLogin() {
-        // Arrange
         UserRepository userRepository = mock(UserRepository.class);
         PasswordEncoder passwordEncoder = mock(PasswordEncoder.class);
         LoggedUser loggedUser = mock(LoggedUser.class);
