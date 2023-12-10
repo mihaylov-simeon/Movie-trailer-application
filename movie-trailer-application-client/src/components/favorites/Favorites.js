@@ -24,14 +24,10 @@ const Favorites = () => {
 
   const removeFromFavorites = async (imdbId) => {
     try {
-      // Remove the movie from favorites
       await axiosConfig.delete(`/remove-favorite/${imdbId}`);
-
-      // Update the state to reflect the changes
       setFavorites((prevFavorites) => prevFavorites.filter((favorite) => favorite.imdbId !== imdbId));
     } catch (error) {
       console.error('Error removing from favorites:', error);
-      // Handle error as needed
     }
   };
 
@@ -46,7 +42,6 @@ const Favorites = () => {
           <div key={favorite.imdbId} className="favorite-grid-item">
             <img src={favorite.poster} alt={favorite.title} />
             <h4>{favorite.title}</h4>
-            {/* Heart icon for removing from favorites */}
             <FontAwesomeIcon
               icon={faHeart}
               className="heart-icon"

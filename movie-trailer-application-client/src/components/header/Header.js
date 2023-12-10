@@ -19,9 +19,7 @@ const Header = () => {
   }, [name]);
 
   const handleLogout = () => {
-    // Call the logout function from the AuthProvider
     logout();
-    // Redirect to the login page
     navigate('/login');
   };
   

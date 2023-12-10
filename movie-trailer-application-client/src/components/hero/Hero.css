@@ -97,9 +97,9 @@ body {
 }
 
 .view-toggle-button-container {
-  margin: 10px; /* Adjusted margin to provide some spacing */
-  display: flex; /* Added display flex to have buttons in a row */
-  align-items: center; /* Center items vertically */
+  margin: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .view-toggle-button-container button {
@@ -108,7 +108,7 @@ body {
   background-color: gold;
   color: black;
   font-weight: bold;
-  margin-right: 10px; /* Added margin between the two buttons */
+  margin-right: 10px;
 }
 
 .view-toggle-button-container button:hover {

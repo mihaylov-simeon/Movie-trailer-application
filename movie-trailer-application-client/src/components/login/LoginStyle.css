@@ -2,8 +2,8 @@
 
 .login-page {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   height: 100vh;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;

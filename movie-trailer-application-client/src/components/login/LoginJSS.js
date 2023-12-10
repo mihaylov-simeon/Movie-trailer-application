@@ -38,16 +38,11 @@ const Login = () => {
       
 
       if (response.status === 200) {
-        // Set authentication status using the context
         login(response.data.name);
-
-        // Redirect to the home page or any other page
         navigate("/");
       } else {
-        // Handle other scenarios if needed
       }
     } catch (error) {
-      // Handle login error
       console.error("Login failed:", error);
     }
   };
@@ -60,10 +55,8 @@ const Login = () => {
         email: formData.email,
         password: formData.password,
       });
-      // Handle successful registration
       console.log("Registered:", response.data);
     } catch (error) {
-      // Handle registration error
       console.error("Registration failed:", error);
     }
   };

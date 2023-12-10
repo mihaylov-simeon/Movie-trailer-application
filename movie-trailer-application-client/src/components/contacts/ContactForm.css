@@ -23,7 +23,7 @@ h1 {
   font-size: 20px;
   line-height: 20px;
   text-transform: uppercase;
-  transform-origin: left bottom !important; /* Ensure this property is applied */
+  transform-origin: left bottom !important;
   transition: all 0.3s;
   transform: translateY(-34px);
 }

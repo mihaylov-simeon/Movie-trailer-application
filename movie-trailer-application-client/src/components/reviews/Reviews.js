@@ -24,7 +24,6 @@ const Reviews = ({getMovieData, movie, reviews, setReviews}) => {
         try {
             const response = await axiosConfig.post("/Reviews", { reviewBody: rev.value, imdbId: movieId });
     
-            // You can inspect the response status and data here
             if (response.status === 200) {
                 console.log("Review successfully posted!");
                 console.log("Response data:", response.data);

@@ -45,17 +45,13 @@ const Hero = ({ movies }) => {
         navigate('/login');
         return;
       }
-
-      // Check if the movie is already in favorites
       const isMovieInFavorites = favorites.some((favorite) => favorite.imdbId === movie.imdbId);
 
       if (isMovieInFavorites) {
-        // If the movie is already in favorites, remove it
         await axiosConfig.delete(`/remove-favorite/${movie.imdbId}`);
         console.log('Movie removed from favorites:', movie.imdbId);
         alert('Movie removed from favorites!');
       } else {
-        // If the movie is not in favorites, add it
         const response = await axiosConfig.post('/add-favorite', {
           imdbId: movie.imdbId,
           title: movie.title,

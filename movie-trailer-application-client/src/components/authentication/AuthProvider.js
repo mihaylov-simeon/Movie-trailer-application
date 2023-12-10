@@ -1,5 +1,3 @@
-// AuthProvider.js
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axiosConfig from "../../api/axiosConfig";
 
@@ -12,7 +10,6 @@ export const AuthProvider = ({ children }) => {
 
   const updateName = (newName) => {
     setUserName(newName);
-    // update the local storage to persist changes with the updated name
     localStorage.setItem('name', newName);
   };
 
@@ -32,7 +29,7 @@ export const AuthProvider = ({ children }) => {
 
       setIsLoggedIn(true);
     }
-  }, []); // No dependencies, so it runs only once on mount
+  }, []);
 
   const login = (name, email) => {
     setIsLoggedIn(true);

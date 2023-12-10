@@ -1,4 +1,3 @@
-// MemoizedDropdownItem.jsx
 import React, { memo } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 

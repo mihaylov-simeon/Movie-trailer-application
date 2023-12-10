@@ -1,62 +1,52 @@
-/* Header.css */
-
-/* Navbar container */
 .navbar {
-  background-color: #343a40; /* Dark background color */
+  background-color: #343a40;
 }
 
-/* Navbar brand styling */
 .navbar-brand {
-  color: #fff !important; /* Navbar brand text color */
+  color: #fff !important;
   font-weight: bold;
 }
 
-/* Navigation links styling */
 .nav-link {
-  color: #fff !important; /* Link text color */
+  color: #fff !important;
   font-weight: normal;
   position: relative;
   transition: all 0.3s;
 }
 
-/* Box around the clicked link */
 .nav-link::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 50%;
   width: 0;
-  height: 3px; /* Adjust the height as needed */
-  background-color: gold; /* Box color */
+  height: 3px;
+  background-color: gold;
   transition: all 0.3s;
-  transform: translateX(-50%); /* Center the box */
+  transform: translateX(-50%);
 }
 
-/* Extrude the box when the link is clicked or focused */
 .nav-link:active::after,
 .nav-link:focus::after {
   width: 100%;
 }
 
-/* Style for hovered and active links */
 .nav-link:hover,
 .nav-link:active,
 .nav-link:focus {
-  font-weight: bold; /* Increase font weight on hover/active/focus */
+  font-weight: bold;
   color: gold !important;
 }
 
-/* User info styling */
 div.me-2 {
   margin: 15px;
-  color: #fff; /* Text color */
+  color: #fff;
 }
 
 div.me-2 > span {
   margin-right: 15px;
 }
 
-/* Navbar toggle button styling */
 #navbarScroll > button {
   border: 1.5px solid gold;
   color: gold;
@@ -69,7 +59,6 @@ div.me-2 > span {
   border-color: black;
 }
 
-/* Navbar links styling */
 #navbarScroll > a {
   background-color: transparent;
   border: 1.5px solid gold;

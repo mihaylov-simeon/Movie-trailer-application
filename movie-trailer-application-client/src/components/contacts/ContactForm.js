@@ -6,8 +6,6 @@ const ContactForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
     
-        // Your form handling logic goes here
-    
         const formData = new FormData(e.target);
     
         try {
@@ -28,7 +26,6 @@ const ContactForm = () => {
           console.error("Error submitting the form:", error);
         }
     
-        // Clear the form fields
         e.target.reset();
       };
   return (
