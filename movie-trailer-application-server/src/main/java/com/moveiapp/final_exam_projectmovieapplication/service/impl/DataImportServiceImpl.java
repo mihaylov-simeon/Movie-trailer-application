@@ -49,10 +49,8 @@ public class DataImportServiceImpl implements DataImportService {
 
     @Override
     public List<Movie> readMoviesFromJson() throws IOException {
-        // Create an ObjectMapper instance
         ObjectMapper objectMapper = new ObjectMapper();
 
-        // Read data from the JSON file and convert it to a list of Movie objects
         return objectMapper.readValue(
                 getClass().getClassLoader().getResourceAsStream("files/json/movies.json"),
                 new TypeReference<List<Movie>>() {}

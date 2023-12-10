@@ -45,11 +45,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is already logged in.");
         }
 
-        // Assuming you have a method in userService to fetch user details by email
         UserRegistrationDTO userDetails = userService.getUserDetailsByEmail(userLoginDTO.getEmail());
 
         if (userDetails != null && userService.login(userLoginDTO)) {
-            // Include the user's name in the response
             Map<String, Object> response = new HashMap<>();
             response.put("message", "Login successful");
             response.put("name", userLoginDTO.getName());
@@ -79,10 +77,8 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("User is not logged in.");
         }
 
-        // Call the service to mark the user as active: false
         this.userService.logout(loggedUser.getEmail());
 
-        // Clear the authentication state
         loggedUser.logout();
 
         return ResponseEntity.ok().body("Logout successful");
@@ -92,13 +88,13 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<List<FavoriteMovie>> getFavoriteMovies(@RequestHeader HttpHeaders headers) {
         try {
-            System.out.println("Headers: " + headers); // Add this line
-            System.out.println("Endpoint /favorites accessed."); // Add this line
+            System.out.println("Headers: " + headers);
+            System.out.println("Endpoint /favorites accessed.");
             List<FavoriteMovie> favoriteMovies = userService.getFavoriteMovies();
             System.out.println("Movies: " + favoriteMovies);
             return ResponseEntity.ok(favoriteMovies);
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception for debugging
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.emptyList());
         }
     }
@@ -150,7 +146,6 @@ public class UserController {
     public ResponseEntity<?> updateUserName(@RequestBody UserRegistrationDTO userRegistrationDTO) {
         try {
             if (loggedUser.isLogged()) {
-                // Assuming you have a service method to update the user's name
                 userService.updateUserName(loggedUser.getEmail(), userRegistrationDTO.getName());
                 return ResponseEntity.ok().body("Name updated successfully");
             } else {
