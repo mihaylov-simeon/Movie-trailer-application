@@ -7,7 +7,7 @@ In order to run it, you will need **React setup for the Client side.**
 Please run the following commands in your Intellij/VsCode:
 
 ### winget install OpenJS.NodeJS --- Windows
-### brew install node
+### brew install node --- MacOS
 ### npx create-react-app movie-trailer-application
 ### npm install axios
 ### code .
